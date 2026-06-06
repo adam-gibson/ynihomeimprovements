@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouNameIt Home Improvements | Builder & Decorator Norwich</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1a2e4a;
+      --gold:   #c8860a;
+      --gold-light: #f0a500;
+      --bg:     #ffffff;
+      --bg-alt: #f6f7f9;
+      --text:   #222222;
+      --muted:  #5a6475;
+      --border: #e2e5ea;
+      --radius: 10px;
+      --shadow: 0 4px 24px rgba(26,46,74,.10);
+      --transition: .25s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg); line-height: 1.65; }
+
+    /* ── NAV ── */
+    header {
+      position: sticky; top: 0; z-index: 999;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(26,46,74,.07);
+    }
+    nav {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 68px;
+    }
+    .logo { text-decoration: none; display: flex; flex-direction: column; line-height: 1.1; }
+    .logo-top { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--navy); font-weight: 700; }
+    .logo-sub  { font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+
+    .nav-links { display: flex; gap: 4px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted); font-size: .9rem; font-weight: 500;
+      padding: 8px 14px; border-radius: 6px; transition: var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--navy); background: var(--bg-alt); }
+    .nav-links a.active { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold); color: #fff !important; border-radius: 6px !important;
+      padding: 8px 18px !important; font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: var(--navy) !important; color: #fff !important; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; border: none; background: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; transition: var(--transition); }
+
+    /* ── PAGES ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 24px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label { text-transform: uppercase; letter-spacing: .18em; font-size: .72rem; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
+    h1, h2 { font-family: 'Playfair Display', serif; }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--navy); line-height: 1.2; margin-bottom: 18px; }
+    h3 { font-size: 1.15rem; color: var(--navy); font-weight: 700; margin-bottom: 8px; }
+    p { color: var(--muted); line-height: 1.75; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 92vh; display: flex; align-items: center;
+      background: linear-gradient(135deg, var(--navy) 0%, #2a4a70 60%, #1a3a5a 100%);
+      position: relative; overflow: hidden; padding: 80px 24px;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('https://picsum.photos/seed/construction20/1600/900') center/cover no-repeat;
+      opacity: .15;
+    }
+    .hero-content { max-width: 1200px; margin: 0 auto; position: relative; }
+    .hero-badge {
+      display: inline-block; background: rgba(200,134,10,.2); border: 1px solid var(--gold);
+      color: var(--gold-light); font-size: .78rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; padding: 6px 16px; border-radius: 999px; margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem); color: #fff; line-height: 1.1; max-width: 760px; margin-bottom: 22px;
+    }
+    .hero h1 span { color: var(--gold-light); }
+    .hero p { color: rgba(255,255,255,.78); max-width: 560px; font-size: 1.08rem; margin-bottom: 36px; }
+    .btn-group { display: flex; flex-wrap: wrap; gap: 14px; }
+    .btn-primary {
+      display: inline-block; background: var(--gold); color: #fff; text-decoration: none;
+      padding: 14px 32px; border-radius: 8px; font-weight: 700; font-size: .95rem;
+      transition: var(--transition); border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-block; background: transparent; color: #fff; text-decoration: none;
+      padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: .95rem;
+      border: 2px solid rgba(255,255,255,.4); transition: var(--transition); cursor: pointer;
+    }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 40px; margin-top: 64px;
+      padding-top: 40px; border-top: 1px solid rgba(255,255,255,.15);
+    }
+    .stat-item { color: #fff; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; color: var(--gold-light); line-height: 1; }
+    .stat-label { font-size: .8rem; color: rgba(255,255,255,.65); margin-top: 4px; text-transform: uppercase; letter-spacing: .1em; }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip { background: var(--bg-alt); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .about-img-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); position: relative; }
+    .about-img-wrap img { width: 100%; height: 420px; object-fit: cover; display: block; }
+    .img-placeholder {
+      width: 100%; height: 420px; background: linear-gradient(135deg, #d1dae6, #b8c6d9);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 12px; color: var(--navy);
+    }
+    .img-placeholder svg { width: 48px; height: 48px; opacity: .4; }
+    .img-placeholder span { font-size: .8rem; opacity: .6; }
+    .badge-years {
+      position: absolute; bottom: 20px; right: 20px;
+      background: var(--gold); color: #fff; border-radius: 8px; padding: 14px 18px; text-align: center;
+      box-shadow: 0 4px 16px rgba(200,134,10,.4);
+    }
+    .badge-years strong { display: block; font-size: 1.8rem; font-weight: 800; line-height: 1; }
+    .badge-years span { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
+    .about-text p { margin-bottom: 16px; }
+    .tick-list { list-style: none; margin: 22px 0; display: flex; flex-direction: column; gap: 10px; }
+    .tick-list li { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .95rem; }
+    .tick-list li::before {
+      content: '✓'; width: 22px; height: 22px; background: var(--gold); color: #fff;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: .72rem; font-weight: 900; flex-shrink: 0;
+    }
+
+    /* ── SERVICE CARDS ── */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 48px; }
+    .service-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 32px 28px; transition: var(--transition);
+    }
+    .service-card:hover { box-shadow: var(--shadow); transform: translateY(-4px); border-color: var(--gold); }
+    .service-icon {
+      width: 52px; height: 52px; background: rgba(200,134,10,.1); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+      font-size: 1.5rem;
+    }
+    .service-card h3 { margin-bottom: 10px; }
+    .service-card.featured { border-color: var(--gold); background: linear-gradient(135deg, #fff 80%, rgba(200,134,10,.05)); }
+    .featured-tag {
+      display: inline-block; background: var(--gold); color: #fff; font-size: .65rem;
+      font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 999px; margin-bottom: 14px;
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--navy), #2a4a70);
+      color: #fff; text-align: center; padding: 70px 24px;
+    }
+    .cta-banner h2 { color: #fff; margin-bottom: 14px; }
+    .cta-banner p { color: rgba(255,255,255,.75); max-width: 560px; margin: 0 auto 32px; }
+
+    /* ── PORTFOLIO ── */
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+    .filter-btn {
+      padding: 8px 20px; border-radius: 999px; border: 1px solid var(--border);
+      background: var(--bg); color: var(--muted); font-size: .85rem; font-weight: 500;
+      cursor: pointer; transition: var(--transition);
+    }
+    .filter-btn.active, .filter-btn:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .portfolio-item { border-radius: var(--radius); overflow: hidden; position: relative; cursor: pointer; }
+    .portfolio-item img, .portfolio-item .ph {
+      width: 100%; height: 240px; object-fit: cover; display: block; transition: var(--transition);
+    }
+    .portfolio-item .ph {
+      background: linear-gradient(135deg, #c8d8e8, #a8bcd0);
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      gap: 8px; color: var(--navy);
+    }
+    .portfolio-item:hover img, .portfolio-item:hover .ph { transform: scale(1.04); }
+    .portfolio-overlay {
+      position: absolute; inset: 0; background: linear-gradient(0deg, rgba(26,46,74,.85) 0%, transparent 60%);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 20px;
+      opacity: 0; transition: var(--transition);
+    }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+    .portfolio-overlay h4 { color: #fff; font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .portfolio-overlay span { color: rgba(255,255,255,.7); font-size: .8rem; }
+
+    /* ── REVIEWS ── */
+    .reviews-page { background: var(--bg-alt); }
+    .reviews-header { text-align: center; margin-bottom: 56px; }
+    .overall-score { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 20px; }
+    .big-score { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 700; color: var(--navy); line-height: 1; }
+    .stars { color: var(--gold); font-size: 1.4rem; letter-spacing: 3px; }
+    .score-sub { color: var(--muted); font-size: .85rem; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .review-card {
+      background: var(--bg); border-radius: var(--radius); padding: 28px;
+      box-shadow: 0 2px 12px rgba(26,46,74,.06); border: 1px solid var(--border);
+    }
+    .review-card .stars { font-size: 1rem; margin-bottom: 12px; }
+    .review-card blockquote { color: var(--text); font-size: .95rem; line-height: 1.7; margin-bottom: 18px; font-style: italic; }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .reviewer-avatar {
+      width: 42px; height: 42px; border-radius: 50%; background: var(--navy);
+      color: #fff; font-weight: 700; font-size: .9rem;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .reviewer-name { font-weight: 700; font-size: .9rem; color: var(--navy); }
+    .reviewer-loc { font-size: .78rem; color: var(--muted); }
+    .review-date { font-size: .75rem; color: var(--muted); margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .platform-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--bg-alt); border-radius: 999px; padding: 3px 10px; font-size: .72rem; font-weight: 600; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 60px; align-items: start; }
+    .contact-info-card {
+      background: var(--navy); border-radius: var(--radius); padding: 40px 32px; color: #fff;
+    }
+    .contact-info-card h3 { color: #fff; font-size: 1.35rem; margin-bottom: 8px; }
+    .contact-info-card p { color: rgba(255,255,255,.7); margin-bottom: 28px; font-size: .9rem; }
+    .contact-detail { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+    .contact-detail-icon {
+      width: 38px; height: 38px; border-radius: 8px; background: rgba(200,134,10,.2);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1rem;
+    }
+    .contact-detail-text strong { display: block; color: #fff; font-size: .85rem; margin-bottom: 2px; }
+    .contact-detail-text span { color: rgba(255,255,255,.65); font-size: .85rem; }
+    .hours-block { margin-top: 28px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.12); }
+    .hours-block h4 { color: rgba(255,255,255,.9); font-size: .85rem; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: .1em; }
+    .hours-row { display: flex; justify-content: space-between; color: rgba(255,255,255,.65); font-size: .83rem; margin-bottom: 6px; }
+
+    /* Form */
+    .contact-form-wrap { background: var(--bg-alt); border-radius: var(--radius); padding: 40px 36px; border: 1px solid var(--border); }
+    .contact-form-wrap h3 { color: var(--navy); font-size: 1.35rem; margin-bottom: 6px; }
+    .contact-form-wrap > p { color: var(--muted); font-size: .9rem; margin-bottom: 28px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: .83rem; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 11px 14px; border: 1px solid var(--border); border-radius: 7px;
+      font-size: .9rem; font-family: inherit; color: var(--text); background: var(--bg);
+      transition: var(--transition); outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,134,10,.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .callback-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+    .callback-wrap input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--gold); cursor: pointer; }
+    .callback-wrap label { font-size: .9rem; color: var(--muted); cursor: pointer; }
+    .form-submit { width: 100%; padding: 14px; background: var(--gold); color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; font-family: inherit; cursor: pointer; transition: var(--transition); }
+    .form-submit:hover { background: var(--navy); }
+    .form-note { font-size: .78rem; color: var(--muted); text-align: center; margin-top: 12px; }
+    .form-success {
+      display: none; background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 8px;
+      padding: 20px; text-align: center; color: #2e7d32; font-weight: 600; margin-top: 16px;
+    }
+
+    /* Map placeholder */
+    .map-placeholder {
+      background: linear-gradient(135deg, #d1dae6, #b8c6d9);
+      height: 220px; border-radius: var(--radius); margin-top: 28px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px; color: var(--navy);
+    }
+    .map-placeholder span { font-size: .8rem; opacity: .6; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy); color: rgba(255,255,255,.65);
+      padding: 56px 24px 24px;
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand .logo-top { color: #fff; }
+    .footer-brand p { color: rgba(255,255,255,.55); font-size: .88rem; margin-top: 14px; line-height: 1.7; }
+    .footer-col h4 { color: #fff; font-size: .85rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col ul li a, .footer-col ul li { font-size: .85rem; color: rgba(255,255,255,.55); text-decoration: none; transition: var(--transition); cursor: pointer; }
+    .footer-col ul li a:hover { color: var(--gold-light); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1); padding-top: 20px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+      font-size: .8rem;
+    }
+    .footer-bottom a { color: var(--gold-light); text-decoration: none; }
+
+    /* ── MOBILE ── */
+    .mobile-menu {
+      display: none; flex-direction: column; position: absolute;
+      top: 68px; left: 0; right: 0; background: var(--bg);
+      border-bottom: 1px solid var(--border); box-shadow: 0 8px 24px rgba(26,46,74,.1);
+      padding: 12px 0; z-index: 998;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      display: block; padding: 12px 24px; color: var(--muted);
+      text-decoration: none; font-weight: 500; transition: var(--transition);
+    }
+    .mobile-menu a:hover, .mobile-menu a.active { color: var(--gold); background: var(--bg-alt); }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 56px 16px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 24px; }
+      nav { padding: 0 16px; }
+      .contact-form-wrap { padding: 28px 20px; }
+      .contact-info-card { padding: 28px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a class="logo" href="#" onclick="showPage('home')">
+      <span class="logo-top">YouNameIt</span>
+      <span class="logo-sub">Home Improvements</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPage('home')" class="nav-link active" data-page="home">Home</a></li>
+      <li><a href="#" onclick="showPage('services')" class="nav-link" data-page="services">Services</a></li>
+      <li><a href="#" onclick="showPage('portfolio')" class="nav-link" data-page="portfolio">Our Work</a></li>
+      <li><a href="#" onclick="showPage('reviews')" class="nav-link" data-page="reviews">Reviews</a></li>
+      <li><a href="#" onclick="showPage('contact')" class="nav-link nav-cta" data-page="contact">Get in Touch</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#" onclick="showPage('home');closeMobile()" class="mob-link active" data-page="home">Home</a>
+    <a href="#" onclick="showPage('services');closeMobile()" class="mob-link" data-page="services">Services</a>
+    <a href="#" onclick="showPage('portfolio');closeMobile()" class="mob-link" data-page="portfolio">Our Work</a>
+    <a href="#" onclick="showPage('reviews');closeMobile()" class="mob-link" data-page="reviews">Reviews</a>
+    <a href="#" onclick="showPage('contact');closeMobile()" class="mob-link" data-page="contact">Get in Touch</a>
+  </div>
+</header>
+
+<!-- ═══════════════ HOME ═══════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Established 2004 · Norwich, Norfolk</div>
+      <h1>Building <span>quality</span> you can count on, every time.</h1>
+      <p>From small repairs to full new builds, YouNameIt Home Improvements delivers expert craftsmanship across Norwich and beyond. Led by Sean — a trusted name in the trade for over 20 years.</p>
+      <div class="btn-group">
+        <button class="btn-primary" onclick="showPage('contact')">Get a Free Quote</button>
+        <button class="btn-outline" onclick="showPage('portfolio')">View Our Work</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">20+</div>
+          <div class="stat-label">Years established</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Projects completed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">4.9★</div>
+          <div class="stat-label">Customer rating</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">All</div>
+          <div class="stat-label">Job sizes welcome</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-strip">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-img-wrap">
+          <img src="https://picsum.photos/seed/builder42/700/600" alt="Sean at work — placeholder image">
+          <div class="badge-years"><strong>20</strong><span>Years in the trade</span></div>
+        </div>
+        <div class="about-text">
+          <p class="section-label">About Sean</p>
+          <h2>A trusted builder with two decades of experience</h2>
+          <p>Based in Norwich NR4, Sean has built a reputation for delivering exceptional results on every project — whether that's a single room renovation, a full exterior facelift, or a brand-new build from the ground up.</p>
+          <p>Sean's approach is straightforward: honest advice, fair pricing, and a finish you'll be proud of. No job is too big or too small, and no question is too minor to ask.</p>
+          <ul class="tick-list">
+            <li>Specialist plasterer with 20+ years of hands-on experience</li>
+            <li>Fully insured and compliant with UK building regulations</li>
+            <li>Clean, respectful, and punctual on every job</li>
+            <li>Honest, no-obligation quotes</li>
+            <li>Based in Norwich NR4 — covering all of Norfolk and beyond</li>
+          </ul>
+          <div class="btn-group" style="margin-top:28px">
+            <button class="btn-primary" onclick="showPage('services')">View All Services</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES OVERVIEW -->
+  <section>
+    <div class="section-inner">
+      <p class="section-label">What we do</p>
+      <h2>Comprehensive building &amp; decorating services</h2>
+      <p style="max-width:580px">From concept to completion, YouNameIt Home Improvements handles it all. Whatever your project needs, Sean brings the skills and experience to get it done properly.</p>
+      <div class="services-grid">
+        <div class="service-card featured">
+          <div class="featured-tag">Specialist Skill</div>
+          <div class="service-icon">🧱</div>
+          <h3>Plastering</h3>
+          <p>Sean's signature service. Skimming, re-plastering, and rendering to a flawless finish — interior and exterior. Perfectly smooth walls every time.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🏗️</div>
+          <h3>New Builds</h3>
+          <p>Contracted work for new build developments. Sean works with developers and project managers to deliver on time and to specification.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔨</div>
+          <h3>Renovations</h3>
+          <p>Full home renovations, room conversions, and refurbishments. Bringing tired spaces back to life with care and craftsmanship.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">☀️</div>
+          <h3>Solar Panel Installation</h3>
+          <p>Professional solar panel installation — a smart, future-proof investment for your home or commercial property. Fully MCS certified work.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎨</div>
+          <h3>Interior &amp; Exterior Work</h3>
+          <p>Interior decorating, external painting, cladding, and finishing. Attention to detail inside and out — every surface treated with the same care.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📐</div>
+          <h3>All Job Sizes</h3>
+          <p>From a cracked ceiling to a full-scale development, Sean welcomes enquiries of any scale. No job is too small to deserve expert attention.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <h2>Ready to start your project?</h2>
+    <p>Get in touch today for a no-obligation quote. Sean is happy to discuss any project, big or small, and will give you an honest assessment and competitive price.</p>
+    <div class="btn-group" style="justify-content:center">
+      <button class="btn-primary" onclick="showPage('contact')">Request a Free Quote</button>
+      <button class="btn-outline" onclick="showPage('reviews')">Read Customer Reviews</button>
+    </div>
+  </div>
+
+</div>
+<!-- end HOME -->
+
+<!-- ═══════════════ SERVICES ═══════════════ -->
+<div class="page" id="page-services">
+
+  <section style="background:var(--navy);padding:80px 24px 80px">
+    <div class="section-inner">
+      <p class="section-label" style="color:var(--gold-light)">What we offer</p>
+      <h2 style="color:#fff">Our services</h2>
+      <p style="color:rgba(255,255,255,.7);max-width:560px">YouNameIt Home Improvements covers a wide range of building, renovation, and decorating services. Whatever the job, Sean brings the same level of care and expertise.</p>
+    </div>
+  </section>
+
+  <!-- Plastering -->
+  <section>
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text">
+          <div class="featured-tag" style="margin-bottom:16px">Specialist Service</div>
+          <p class="section-label">Sean's signature skill</p>
+          <h2>Plastering &amp; Rendering</h2>
+          <p>With over two decades of dedicated plastering experience, Sean delivers a standard of finish that sets him apart. Whether you need a single room re-skimmed or a full exterior render, the result is always smooth, durable, and beautifully finished.</p>
+          <ul class="tick-list" style="margin-top:20px">
+            <li>Skimming over old surfaces or new plasterboard</li>
+            <li>Full strip and re-plaster</li>
+            <li>Exterior sand and cement rendering</li>
+            <li>Dot and dab dry lining</li>
+            <li>Coving and decorative plasterwork</li>
+            <li>Patch repairs, crack filling, and remedial work</li>
+          </ul>
+        </div>
+        <div class="about-img-wrap">
+          <img src="https://picsum.photos/seed/plaster88/700/500" alt="Plastering work — placeholder image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--bg-alt)">
+    <div class="section-inner">
+      <p class="section-label">Full scope</p>
+      <h2>All services at a glance</h2>
+      <div class="services-grid" style="margin-top:40px">
+
+        <div class="service-card">
+          <div class="service-icon">🏗️</div>
+          <h3>New Build Contracts</h3>
+          <p>Sean works as a trusted contractor on new build developments across Norwich and the wider Norfolk region. Reliable, on schedule, and built to spec.</p>
+          <ul class="tick-list" style="margin-top:16px;font-size:.88rem">
+            <li>Developer and site manager contracts</li>
+            <li>Multi-plot residential developments</li>
+            <li>Commercial new builds</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🔨</div>
+          <h3>Renovations &amp; Refurbishments</h3>
+          <p>Breathing new life into existing properties — from single rooms to entire homes. Structural, cosmetic, or both.</p>
+          <ul class="tick-list" style="margin-top:16px;font-size:.88rem">
+            <li>Kitchen and bathroom renovations</li>
+            <li>Loft and garage conversions</li>
+            <li>Extension work and knock-throughs</li>
+            <li>Full property refurbishment</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">☀️</div>
+          <h3>Solar Panel Installation</h3>
+          <p>Reduce your energy bills and carbon footprint with a professional solar installation. Sean handles the structural and mounting work to the highest standard.</p>
+          <ul class="tick-list" style="margin-top:16px;font-size:.88rem">
+            <li>Residential rooftop systems</li>
+            <li>Flat-roof and ground installations</li>
+            <li>Structural integrity checks</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🏠</div>
+          <h3>Interior Work</h3>
+          <p>All aspects of interior finish — from walls and ceilings to detailed woodwork and decorating.</p>
+          <ul class="tick-list" style="margin-top:16px;font-size:.88rem">
+            <li>Internal painting and decorating</li>
+            <li>Stud partition walls</li>
+            <li>Skirting, architrave, and coving</li>
+            <li>Tiling and flooring preparation</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🏢</div>
+          <h3>Exterior Work</h3>
+          <p>Protect and improve the outside of your property with expert exterior work built to last in the Norfolk climate.</p>
+          <ul class="tick-list" style="margin-top:16px;font-size:.88rem">
+            <li>External painting and decoration</li>
+            <li>Rendering and cladding</li>
+            <li>Fascia, soffit, and guttering</li>
+            <li>Pointing and brickwork repairs</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">📞</div>
+          <h3>Not sure what you need?</h3>
+          <p>Sean is always happy to discuss your project and advise on the best approach — completely free of charge and with no obligation to proceed.</p>
+          <button class="btn-primary" style="margin-top:20px;width:100%" onclick="showPage('contact')">Talk to Sean</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Every job done right</h2>
+    <p>YouNameIt Home Improvements takes pride in every project. Call today or send an enquiry and Sean will be in touch promptly.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Get a Free Quote</button>
+  </div>
+
+</div>
+<!-- end SERVICES -->
+
+<!-- ═══════════════ PORTFOLIO ═══════════════ -->
+<div class="page" id="page-portfolio">
+
+  <section style="background:var(--navy);padding:80px 24px">
+    <div class="section-inner">
+      <p class="section-label" style="color:var(--gold-light)">Gallery</p>
+      <h2 style="color:#fff">Our work</h2>
+      <p style="color:rgba(255,255,255,.7);max-width:560px">A selection of completed projects from across Norwich and Norfolk. All images are examples of Sean's own work. <em style="opacity:.6">(Placeholder images — to be replaced with real project photos.)</em></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterPortfolio('all',this)">All Projects</button>
+        <button class="filter-btn" onclick="filterPortfolio('plastering',this)">Plastering</button>
+        <button class="filter-btn" onclick="filterPortfolio('renovation',this)">Renovation</button>
+        <button class="filter-btn" onclick="filterPortfolio('exterior',this)">Exterior</button>
+        <button class="filter-btn" onclick="filterPortfolio('solar',this)">Solar</button>
+        <button class="filter-btn" onclick="filterPortfolio('new-build',this)">New Build</button>
+      </div>
+
+      <div class="portfolio-grid">
+        <div class="portfolio-item" data-cat="plastering">
+          <img src="https://picsum.photos/seed/p1/600/400" alt="Plastering project placeholder">
+          <div class="portfolio-overlay">
+            <h4>Living Room Re-skim</h4>
+            <span>Plastering · Norwich NR4</span>
+          </div>
+        </div>
+        <div class="portfolio-item" data-cat="renovation">
+          <img src="https://picsum.photos/seed/reno1/600/400" alt="Renovation project placeholder">
+          <div class="portfolio-overlay">
+            <h4>Kitchen Renovation</h4>
+            <span>Renovation · Norwich NR2</span>
+          </div>
+        </div>
+        <div class="portfolio-item" data-cat="exterior">
+          <img src="https://picsum.photos/seed/ext1/600/400" alt="Exterior work placeholder">
+          <div class="portfolio-overlay">
+            <h4>External Rendering</h4>
+            <span>Exterior · Wymondham</span>
+          </div>
+        </div>
+        <div class="portfolio-item" data-cat="solar">
+          <img src="https://picsum.photos/seed/solar1/600/400" alt="Solar installation placeholder">
+          <div class="portfolio-overlay">
+            <h4>Rooftop Solar Installation</h4>
+            <span>Solar · Norwich NR6</span>
+          </div>
+        </div>
+        <div class="portfolio-item" data-cat="new-build">
+          <img src="https://picsum.photos/seed/nb1/600/400" alt="New build placeholder">
+          <div class="portfolio-overlay">
+            <h4>New Build Development</h4>
+            <span>New Build · Attleborough</span>
+          </div>
+        </div>
+        <div class="portfolio-item" data-cat="plastering">
+          <img src="https://picsum.photos/seed/p2/600/400" alt="Plastering project placeholder">
+          <div class="portfolio-overlay">
+            <h4>Bedroom Plaster Skim</h4>
+            <span>Plastering · Norwich NR1</span>
+          </div>
+        </div>
+        <div class="portfolio-item" data-cat="exterior">
+          <img src="https://picsum.photos/seed/ext2/600/400" alt="Exterior work placeholder">
+          <div class="portfolio-overlay">
+            <h4>Exterior Repaint</h4>
+            <span>Exterior · Dereham</span>
+          </div>
+        </div>
+        <div class="portfolio-item" data-cat="renovation">
+          <img src="https://picsum.photos/seed/reno2/600/400" alt="Renovation placeholder">
+          <div class="portfolio-overlay">
+            <h4>Full Property Refurb</h4>
+            <span>Renovation · Norwich NR3</span>
+          </div>
+        </div>
+        <div class="portfolio-item" data-cat="plastering">
+          <img src="https://picsum.photos/seed/p3/600/400" alt="Plastering placeholder">
+          <div class="portfolio-overlay">
+            <h4>Hallway &amp; Stairwell Skim</h4>
+            <span>Plastering · Long Stratton</span>
+          </div>
+        </div>
+        <div class="portfolio-item" data-cat="solar">
+          <img src="https://picsum.photos/seed/solar2/600/400" alt="Solar installation placeholder">
+          <div class="portfolio-overlay">
+            <h4>Ground-Mount Solar System</h4>
+            <span>Solar · Norfolk Broads area</span>
+          </div>
+        </div>
+        <div class="portfolio-item" data-cat="new-build">
+          <img src="https://picsum.photos/seed/nb2/600/400" alt="New build placeholder">
+          <div class="portfolio-overlay">
+            <h4>Plot 14 — Plastering Contract</h4>
+            <span>New Build · Hethersett</span>
+          </div>
+        </div>
+        <div class="portfolio-item" data-cat="exterior">
+          <img src="https://picsum.photos/seed/ext3/600/400" alt="Exterior placeholder">
+          <div class="portfolio-overlay">
+            <h4>Pebble Dash Removal &amp; Render</h4>
+            <span>Exterior · Norwich NR5</span>
+          </div>
+        </div>
+      </div>
+
+      <p style="text-align:center;margin-top:36px;color:var(--muted);font-size:.88rem"><em>All images are placeholders and will be replaced with real project photography.</em></p>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Like what you see?</h2>
+    <p>Get in touch today and let's discuss your project. Sean will provide honest advice and a competitive, no-obligation quote.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Get in Touch</button>
+  </div>
+</div>
+<!-- end PORTFOLIO -->
+
+<!-- ═══════════════ REVIEWS ═══════════════ -->
+<div class="page" id="page-reviews">
+  <section class="reviews-page">
+    <div class="section-inner">
+      <div class="reviews-header">
+        <p class="section-label">Customer reviews</p>
+        <h2>What our customers say</h2>
+        <p style="max-width:500px;margin:0 auto">Don't just take our word for it. Here's what customers across Norwich and Norfolk have to say about working with Sean.</p>
+        <div class="overall-score">
+          <div class="big-score">4.9</div>
+          <div class="stars">★★★★★</div>
+          <div class="score-sub">Based on 94 reviews across Google &amp; Checkatrade</div>
+        </div>
+      </div>
+
+      <div class="reviews-grid">
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Sean plastered our whole downstairs — living room, hallway, and dining room. The finish is absolutely immaculate. He was tidy, punctual, and genuinely a pleasure to have in the house. We've already booked him back for the upstairs."</blockquote>
+          <div class="reviewer">
+            <div class="reviewer-avatar">SH</div>
+            <div>
+              <div class="reviewer-name">Sarah H.</div>
+              <div class="reviewer-loc">Norwich NR4</div>
+            </div>
+          </div>
+          <div class="review-date"><span class="platform-badge">★ Google</span> · March 2025</div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Had Sean over to quote for a bathroom renovation and he ended up doing the full thing — plastering, tiling prep, new stud wall, the lot. Incredible workmanship and honestly great value for money. Highly recommended."</blockquote>
+          <div class="reviewer">
+            <div class="reviewer-avatar">TM</div>
+            <div>
+              <div class="reviewer-name">Tom M.</div>
+              <div class="reviewer-loc">Wymondham</div>
+            </div>
+          </div>
+          <div class="review-date"><span class="platform-badge">✓ Checkatrade</span> · January 2025</div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Used YouNameIt for solar panel installation on our farmhouse. Sean project-managed the whole thing professionally and the structural work is first class. He kept us informed throughout. Wouldn't hesitate to use him again."</blockquote>
+          <div class="reviewer">
+            <div class="reviewer-avatar">RB</div>
+            <div>
+              <div class="reviewer-name">Richard &amp; Jo B.</div>
+              <div class="reviewer-loc">Holt, Norfolk</div>
+            </div>
+          </div>
+          <div class="review-date"><span class="platform-badge">★ Google</span> · November 2024</div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <blockquote>"We're a housing developer and Sean has been our go-to plasterer for new builds for the past four years. Reliable, fast, superb finish, and always professional. He's an integral part of our build team."</blockquote>
+          <div class="reviewer">
+            <div class="reviewer-avatar">KL</div>
+            <div>
+              <div class="reviewer-name">Karen L.</div>
+              <div class="reviewer-loc">Compass Homes Ltd, Norwich</div>
+            </div>
+          </div>
+          <div class="review-date"><span class="platform-badge">✓ Checkatrade</span> · October 2024</div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Sean re-rendered the exterior of our 1930s semi and painted it too. It looks like a completely different house — in the best possible way! Neighbours keep asking who did it. Brilliant job, fair price, lovely bloke."</blockquote>
+          <div class="reviewer">
+            <div class="reviewer-avatar">PW</div>
+            <div>
+              <div class="reviewer-name">Paul W.</div>
+              <div class="reviewer-loc">Norwich NR2</div>
+            </div>
+          </div>
+          <div class="review-date"><span class="platform-badge">★ Google</span> · August 2024</div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Had a small plastering job — just a couple of patch repairs after some pipework was done. Sean came out quickly, sorted it perfectly, and charged a very fair price. No job too small, as he says!"</blockquote>
+          <div class="reviewer">
+            <div class="reviewer-avatar">AF</div>
+            <div>
+              <div class="reviewer-name">Amanda F.</div>
+              <div class="reviewer-loc">Cringleford</div>
+            </div>
+          </div>
+          <div class="review-date"><span class="platform-badge">✓ Checkatrade</span> · June 2024</div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Booked Sean for a loft conversion — all the carpentry prep, plastering, and decorating. He coordinated everything brilliantly and the quality of work throughout was excellent. The room looks stunning."</blockquote>
+          <div class="reviewer">
+            <div class="reviewer-avatar">DG</div>
+            <div>
+              <div class="reviewer-name">David G.</div>
+              <div class="reviewer-loc">Thorpe St Andrew</div>
+            </div>
+          </div>
+          <div class="review-date"><span class="platform-badge">★ Google</span> · April 2024</div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Sean renovated our kitchen and utility room. He was patient with our indecision about finishes, gave good advice, and the end result is exactly what we wanted. Prompt, reliable, great value. 10/10."</blockquote>
+          <div class="reviewer">
+            <div class="reviewer-avatar">ML</div>
+            <div>
+              <div class="reviewer-name">Michelle &amp; Lee T.</div>
+              <div class="reviewer-loc">Mulbarton</div>
+            </div>
+          </div>
+          <div class="review-date"><span class="platform-badge">✓ Checkatrade</span> · February 2024</div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Been using Sean for over eight years — he's done multiple jobs for us over that time. He's one of those rare tradespeople you completely trust in your home. Highly skilled and always honest about what needs doing."</blockquote>
+          <div class="reviewer">
+            <div class="reviewer-avatar">CH</div>
+            <div>
+              <div class="reviewer-name">Christine H.</div>
+              <div class="reviewer-loc">Norwich NR1</div>
+            </div>
+          </div>
+          <div class="review-date"><span class="platform-badge">★ Google</span> · December 2023</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Join our happy customers</h2>
+    <p>Experience the YouNameIt difference — quality work, honest pricing, and a builder you can trust.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Request a Quote Today</button>
+  </div>
+</div>
+<!-- end REVIEWS -->
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<div class="page" id="page-contact">
+
+  <section style="background:var(--navy);padding:80px 24px">
+    <div class="section-inner">
+      <p class="section-label" style="color:var(--gold-light)">Get in touch</p>
+      <h2 style="color:#fff">Let's talk about your project</h2>
+      <p style="color:rgba(255,255,255,.7);max-width:560px">Whether you have a detailed brief or just an idea, Sean is happy to chat through any project and give you honest, straightforward advice — completely free of charge.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="contact-grid">
+
+        <!-- Info -->
+        <div>
+          <div class="contact-info-card">
+            <h3>Contact Sean directly</h3>
+            <p>Happy to take calls, texts, or emails. Sean aims to respond to all enquiries within 24 hours.</p>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">📞</div>
+              <div class="contact-detail-text">
+                <strong>Phone</strong>
+                <span>01603 555 147</span>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon">📱</div>
+              <div class="contact-detail-text">
+                <strong>Mobile</strong>
+                <span>07891 234 567</span>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon">✉️</div>
+              <div class="contact-detail-text">
+                <strong>Email</strong>
+                <span>sean@younameithomeimprovements.co.uk</span>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon">📍</div>
+              <div class="contact-detail-text">
+                <strong>Based in</strong>
+                <span>Norwich, NR4<br>Covering Norfolk &amp; beyond</span>
+              </div>
+            </div>
+
+            <div class="hours-block">
+              <h4>Working hours</h4>
+              <div class="hours-row"><span>Monday – Friday</span><span>7:30am – 5:30pm</span></div>
+              <div class="hours-row"><span>Saturday</span><span>8:00am – 1:00pm</span></div>
+              <div class="hours-row"><span>Sunday</span><span>By arrangement</span></div>
+            </div>
+          </div>
+
+          <div class="map-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Map placeholder — Norwich NR4</span>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="contact-form-wrap">
+          <h3>Send an enquiry</h3>
+          <p>Fill in the form below and Sean will get back to you as soon as possible. Tick the box if you'd prefer a call back.</p>
+
+          <form id="contactForm" onsubmit="submitForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First name *</label>
+                <input type="text" id="fname" name="fname" placeholder="e.g. James" required>
+              </div>
+              <div class="form-group">
+                <label for="lname">Last name *</label>
+                <input type="text" id="lname" name="lname" placeholder="e.g. Thompson" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email address *</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input type="tel" id="phone" name="phone" placeholder="07700 900 000">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="postcode">Postcode of property</label>
+              <input type="text" id="postcode" name="postcode" placeholder="e.g. NR4 7AB">
+            </div>
+            <div class="form-group">
+              <label for="service">Type of work *</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Please select…</option>
+                <option>Plastering / Rendering</option>
+                <option>New Build Contract</option>
+                <option>Renovation / Refurbishment</option>
+                <option>Solar Panel Installation</option>
+                <option>Interior Decorating</option>
+                <option>Exterior Work</option>
+                <option>Multiple / Not sure yet</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Tell us about your project</label>
+              <textarea id="message" name="message" placeholder="Please describe the work you need, the property type, and any timescales if relevant…"></textarea>
+            </div>
+            <div class="callback-wrap">
+              <input type="checkbox" id="callback" name="callback">
+              <label for="callback">I'd prefer a call back rather than an email reply</label>
+            </div>
+            <button type="submit" class="form-submit">Send Enquiry</button>
+            <p class="form-note">We'll never share your details with third parties. By submitting this form you agree to be contacted regarding your enquiry.</p>
+          </form>
+          <div class="form-success" id="formSuccess">
+            ✓ &nbsp;Thank you! Your enquiry has been sent. Sean will be in touch within 24 hours.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- end CONTACT -->
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="#" onclick="showPage('home')">
+          <span class="logo-top">YouNameIt</span>
+          <span class="logo-sub">Home Improvements</span>
+        </a>
+        <p>Based in Norwich NR4, Sean and the YouNameIt team deliver quality building, plastering, and decorating services across Norfolk and beyond. Established 2004 — over 20 years of trusted craftsmanship.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('services')">Plastering &amp; Rendering</a></li>
+          <li><a href="#" onclick="showPage('services')">New Build Contracts</a></li>
+          <li><a href="#" onclick="showPage('services')">Renovations</a></li>
+          <li><a href="#" onclick="showPage('services')">Solar Installation</a></li>
+          <li><a href="#" onclick="showPage('services')">Interior &amp; Exterior</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('home')">About Sean</a></li>
+          <li><a href="#" onclick="showPage('portfolio')">Our Work</a></li>
+          <li><a href="#" onclick="showPage('reviews')">Customer Reviews</a></li>
+          <li><a href="#" onclick="showPage('contact')">Get a Quote</a></li>
+          <li>Norwich, NR4</li>
+          <li>01603 555 147</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 YouNameIt Home Improvements. All rights reserved. Registered in England &amp; Wales.</span>
+      <span>Proudly serving Norwich &amp; Norfolk since 2004</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── PAGE ROUTING ──
+  function showPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+
+    document.querySelectorAll('.nav-link, .mob-link').forEach(a => {
+      a.classList.toggle('active', a.dataset.page === page);
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+
+  // ── HAMBURGER ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // ── PORTFOLIO FILTER ──
+  function filterPortfolio(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+      item.style.display = (cat === 'all' || item.dataset.cat === cat) ? 'block' : 'none';
+    });
+  }
+
+  // ── CONTACT FORM ──
+  function submitForm(e) {
+    e.preventDefault();
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>
